@@ -1,0 +1,12 @@
+name: "Current Time"
+author: "Gerred Dillon <hello@gerred.org>"
+description: "Get the current time"
+branding:
+  icon: clock
+  color: blue
+outputs:
+  time:
+    description: "The time this action was run"
+runs:
+  using: "node12"
+  main: "index.js"
