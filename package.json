@@ -6,6 +6,6 @@
   "dependencies": {
     "@actions/core": "^1.1.0",
     "@actions/github": "^1.1.0",
-    "momentjs": "^2.0.0"
+    "moment": "^2.24.0",
   }
 }
