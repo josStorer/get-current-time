@@ -4,9 +4,15 @@ description: "Get the current time with format"
 branding:
   icon: clock
   color: blue
+inputs:
+  format:
+    description: "Time format to use using [MomemtJS syntax](https://momentjs.com/)"
+    default: "<None>"
 outputs:
   time:
     description: "The time this action was run"
+  formattedTime:
+    description: "The time this action was run - formatted using `format` input"
 runs:
   using: "node12"
   main: "index.js"

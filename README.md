@@ -12,11 +12,14 @@ The UTC time when this step was run.
 
 ```yaml
 steps:
-- name: Get current time
-  uses: gerred/actions/current-time@master
-  id: current-time
-- name: Use current time
-  env:
-    TIME: "${{ steps.current-time.outputs.time }}"
-  run: echo $TIME
+  - name: Get current time
+    uses: srfrnk/current-time@master
+    id: current-time
+    with:
+      format: YYYYMMDD
+  - name: Use current time
+    env:
+      TIME: "${{ steps.current-time.outputs.time }}"
+      F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+    run: echo $TIME $F_TIME
 ```
