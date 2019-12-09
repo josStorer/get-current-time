@@ -2,11 +2,21 @@
 
 This action sets the current ISO8601 time to the `time` output. Useful for setting build times in subsequent steps, or keeping the same recorded time for the entire workflow.
 
+## Input
+
+### `format`
+
+Time format to use - using [MomemtJS syntax](https://momentjs.com/) - optional
+
 ## Outputs
 
 ### `time`
 
 The UTC time when this step was run.
+
+### `formattedTime`
+
+The UTC time when this step was run - formatted using `format` input.
 
 ## Example usage
 
