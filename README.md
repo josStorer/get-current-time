@@ -6,7 +6,7 @@ This action sets the current ISO8601 time to the `time` output. Useful for setti
 
 ### `format`
 
-Time format to use - using [MomemtJS syntax](https://momentjs.com/) - optional
+Time format to use - using [MomentJS syntax](https://momentjs.com/docs/#/displaying/) - optional
 
 ## Outputs
 
