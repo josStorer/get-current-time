@@ -1,18 +1,21 @@
-name: "Current Time 2"
-author: "Gerred Dillon <hello@gerred.org>, Shahar Frank<srfrnk@gmail.com>"
-description: "Get the current time with format"
+name: "Get Current Time"
+author: "Gerred Dillon <hello@gerred.org>, Shahar Frank <srfrnk@gmail.com>, Joshua Chan <josStorer@outlook.com>"
+description: "Get the current time with format and utcOffset"
 branding:
   icon: clock
   color: blue
 inputs:
   format:
-    description: "Time format to use using [MomemtJS syntax](https://momentjs.com/)"
-    default: "<None>"
+    description: "Time format to use using [MomemtJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
+    required: false
+  utcOffset:
+    description: "UTC time offset to use using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
+    required: false
 outputs:
   time:
     description: "The time this action was run"
   formattedTime:
-    description: "The time this action was run - formatted using `format` input"
+    description: "The time this action was run - formatted using `format` and `utcOffset` input"
 runs:
   using: "node12"
   main: "index.js"

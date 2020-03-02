@@ -7,7 +7,8 @@ function action() {
         core.setOutput("time", time);
 
         const format = core.getInput('format', { required: false });
-        core.setOutput("formattedTime", moment().format(format));
+        const utcOffset = core.getInput('utcOffset', { required: false });
+        core.setOutput("formattedTime", moment().utcOffset(utcOffset).format(format));
     } catch (error) {
         core.setFailed(error.message);
     }

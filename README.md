@@ -1,12 +1,16 @@
-# Current Time Javascript Action
+# Get Current Time Github Action
 
-This action sets the current ISO8601 time to the `time` output. Useful for setting build times in subsequent steps, or keeping the same recorded time for the entire workflow.
+This action sets the current ISO8601 time to the `time` output. Useful for setting build times in subsequent steps, rename your artifact, or keeping the same recorded time for the entire workflow.
 
 ## Inputs
 
 ### `format`
 
-Time format to use - using [MomentJS syntax](https://momentjs.com/docs/#/displaying/) - optional
+Time format to use - using [MomemtJS format syntax](https://momentjs.com/docs/#/displaying/format/) - optional
+
+### `utcOffset`
+
+UTC time offset to use - using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/) - optional
 
 ## Outputs
 
@@ -23,10 +27,11 @@ The UTC time when this step was run - formatted using `format` input.
 ```yaml
 steps:
   - name: Get current time
-    uses: srfrnk/current-time@master
+    uses: 1466587594/get-current-time@v1
     id: current-time
     with:
-      format: YYYYMMDD
+      format: YYYYMMDD-HH
+      utcOffset: "+08:00"
   - name: Use current time
     env:
       TIME: "${{ steps.current-time.outputs.time }}"
