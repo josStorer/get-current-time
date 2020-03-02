@@ -1,6 +1,6 @@
 # Get Current Time Github Action
 
-This action sets the current ISO8601 time to the `time` output. Useful for setting build times in subsequent steps, rename your artifact, or keeping the same recorded time for the entire workflow.
+This action sets the current ISO8601 time to the `time` output. Useful for setting build times in subsequent steps, renaming your artifact, or keeping the same recorded time for the entire workflow.
 
 ## Inputs
 
