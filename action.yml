@@ -18,4 +18,4 @@ outputs:
     description: "The time this action was run - formatted using `format` and `utcOffset` input"
 runs:
   using: "node12"
-  main: "index.js"
+  main: "dist/index.js"
