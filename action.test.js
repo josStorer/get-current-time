@@ -1,5 +1,9 @@
 const mockMoment = {
-    format: jest.fn()
+    utcOffset: jest.fn().mockReturnThis(),
+    format: jest.fn(),
+    toISOString: jest.fn(),
+    toString: jest.fn(),
+    toArray: jest.fn()
 };
 jest.doMock('moment', () => () => mockMoment);
 
@@ -10,11 +14,6 @@ const mockCore = {
 };
 jest.doMock('@actions/core', () => mockCore);
 
-const mockDate = {
-    toISOString: jest.fn(),
-};
-Date = function () { return mockDate; }
-
 const action = require('./action.js');
 
 describe("action", () => {
@@ -22,10 +21,13 @@ describe("action", () => {
         expect(action).not.toBeNull();
     });
 
-    it("Should run with original functionality", () => {
-        mockDate.toISOString.mockReturnValue('##');
+    it("Should run with basic functionality", () => {
+        mockMoment.toISOString.mockReturnValue('##');
+        mockMoment.toString.mockReturnValue('##');
         action();
         expect(mockCore.setOutput).toHaveBeenCalledWith('time', '##');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('ISOTime', '##');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('readableTime', '##');
     });
 
     it("Should run with format", () => {
@@ -34,9 +36,28 @@ describe("action", () => {
         expect(mockCore.setOutput).toHaveBeenCalledWith('formattedTime', '###');
     });
 
-    it("Should pass format input", () => {
+    it("Should run with other basic outputs", () => {
+        mockMoment.toArray.mockReturnValue(['2020', '0', '1', '12', '0', '1', '2']);
+        action();
+        expect(mockCore.setOutput).toHaveBeenCalledWith('year', '2020');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('month', '1');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('day', '1');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('hour', '12');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('minute', '0');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('second', '1');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('millisecond', '2');
+    });
+
+    it("Should pass format inputs", () => {
         mockCore.getInput.mockReturnValue('###');
         action();
+        expect(mockMoment.utcOffset).toHaveBeenCalledWith('###');
         expect(mockMoment.format).toHaveBeenCalledWith('###');
+    });
+
+    it("Should throw error", () => {
+        mockCore.setOutput = () => { throw new Error('####') }
+        action();
+        expect(mockCore.setFailed).toHaveBeenCalledWith('####');
     });
 });
