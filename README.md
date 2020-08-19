@@ -51,12 +51,11 @@ steps:
       utcOffset: "+08:00"
   - name: Use current time
     env:
-      O: "${{ steps.current-time.outputs }}"
-      TIME: "${{ O.time }}"
-      R_TIME: "${{ O.readableTime }}"
-      F_TIME: "${{ O.formattedTime }}"
-      YEAR: "${{ O.year }}"
-      DAY: "${{ O.day }}"
+      TIME: "${{ steps.current-time.outputs.time }}"
+      R_TIME: "${{ steps.current-time.outputs.readableTime }}"
+      F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      YEAR: "${{ steps.current-time.outputs.year }}"
+      DAY: "${{ steps.current-time.outputs.day }}"
     run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
 ```
 
