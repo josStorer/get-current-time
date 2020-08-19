@@ -1,6 +1,6 @@
 name: "Get Current Time"
 author: "Gerred Dillon <hello@gerred.org>, Shahar Frank <srfrnk@gmail.com>, Joshua Chan <josStorer@outlook.com>"
-description: "Get the current time with format and utcOffset"
+description: "Get the current time with `format` and `utcOffset`"
 branding:
   icon: clock
   color: blue
@@ -9,13 +9,20 @@ inputs:
     description: "Time format to use using [MomemtJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
     required: false
   utcOffset:
-    description: "UTC time offset to use using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
+    description: "UTC offset to use using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
     required: false
 outputs:
   time:
-    description: "The time this action was run"
+    description: "The ISO time this action was run, **not** affected by the parameter `utcOffset`  e.g. '2020-01-01T00:30:15.000Z'"
+  ISOTime:
+    description: "Same as `time`"
+  readableTime:
+    description: "Human-friendly time - affected by the parameter `utcOffset`  e.g. 'Wed Jan 01 2020 08:30:15 GMT+0800'"
   formattedTime:
-    description: "The time this action was run - formatted using `format` and `utcOffset` input"
+    description: "The time this action was run - formatted using `format` and `utcOffset` inputs"
+  year,month,day,hour,minute,second,millisecond:
+    description: "Digital outputs, just as names"
+
 runs:
   using: "node12"
   main: "dist/index.js"
