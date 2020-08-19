@@ -1,4 +1,5 @@
 [![Test the action workflow](https://github.com/1466587594/get-current-time/workflows/Test%20the%20action/badge.svg)](https://github.com/1466587594/get-current-time/actions?query=workflow:"Test+the+action")
+[![codecov](https://codecov.io/gh/1466587594/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/1466587594/get-current-time)
 [![GitHub release](https://img.shields.io/github/release/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-get--current--time-blue?logo=github)](https://github.com/marketplace/actions/get-current-time)
 [![](https://img.shields.io/github/contributors/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/graphs/contributors)
