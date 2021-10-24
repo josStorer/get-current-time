@@ -1,8 +1,10 @@
 [![Test the action workflow](https://github.com/1466587594/get-current-time/workflows/Test%20the%20action/badge.svg)](https://github.com/1466587594/get-current-time/actions?query=workflow:"Test+the+action")
-[![codecov](https://codecov.io/gh/1466587594/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/1466587594/get-current-time/branch/test)
+[![Codecov](https://codecov.io/gh/1466587594/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/1466587594/get-current-time/branch/test)
 [![GitHub release](https://img.shields.io/github/release/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-get--current--time-blue?logo=github)](https://github.com/marketplace/actions/get-current-time)
-[![](https://img.shields.io/github/contributors/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/graphs/contributors)
+[![Repo contributors](https://img.shields.io/github/contributors/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/graphs/contributors)
+[![Open issues](https://img.shields.io/github/issues-raw/1466587594/get-current-time)](https://github.com/1466587594/get-current-time/issues?q=is%3Aissue+is%3Aopen)
+[![Solved issues](https://img.shields.io/github/issues-closed-raw/1466587594/get-current-time/solved?color=4bc51d&label=solved%20issues)](https://github.com/1466587594/get-current-time/issues?q=is%3Aissue+label%3Asolved)
 
 # Get Current Time Github Action
 
