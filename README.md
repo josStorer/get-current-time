@@ -1,8 +1,8 @@
-[![Test the action workflow](https://github.com/1466587594/get-current-time/workflows/Test%20the%20action/badge.svg)](https://github.com/1466587594/get-current-time/actions?query=workflow:"Test+the+action")
-[![codecov](https://codecov.io/gh/1466587594/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/1466587594/get-current-time/branch/test)
-[![GitHub release](https://img.shields.io/github/release/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/releases/latest)
+[![Test the action workflow](https://github.com/josStorer/get-current-time/workflows/Test%20the%20action/badge.svg)](https://github.com/josStorer/get-current-time/actions?query=workflow:"Test+the+action")
+[![codecov](https://codecov.io/gh/josStorer/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/josStorer/get-current-time/branch/test)
+[![GitHub release](https://img.shields.io/github/release/josStorer/get-current-time.svg)](https://github.com/josStorer/get-current-time/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-get--current--time-blue?logo=github)](https://github.com/marketplace/actions/get-current-time)
-[![](https://img.shields.io/github/contributors/1466587594/get-current-time.svg)](https://github.com/1466587594/get-current-time/graphs/contributors)
+[![](https://img.shields.io/github/contributors/josStorer/get-current-time.svg)](https://github.com/josStorer/get-current-time/graphs/contributors)
 
 # Get Current Time Github Action
 
@@ -45,7 +45,7 @@ Digital outputs, just as names
 ```yaml
 steps:
   - name: Get current time
-    uses: 1466587594/get-current-time@v2
+    uses: josStorer/get-current-time@v2
     id: current-time
     with:
       format: YYYYMMDD-HH

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get current time
-        uses: 1466587594/get-current-time@test
+        uses: josStorer/get-current-time@test
         id: current-time
         with:
           format: YYYYMMDD-HH
