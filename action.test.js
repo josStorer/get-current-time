@@ -24,16 +24,12 @@ describe("action", () => {
     it("Should run with basic functionality", () => {
         mockMoment.toISOString.mockReturnValue('##');
         mockMoment.toString.mockReturnValue('##');
+        mockMoment.format.mockReturnValue('##');
         action();
         expect(mockCore.setOutput).toHaveBeenCalledWith('time', '##');
         expect(mockCore.setOutput).toHaveBeenCalledWith('ISOTime', '##');
         expect(mockCore.setOutput).toHaveBeenCalledWith('readableTime', '##');
-    });
-
-    it("Should run with format", () => {
-        mockMoment.format.mockReturnValue('###');
-        action();
-        expect(mockCore.setOutput).toHaveBeenCalledWith('formattedTime', '###');
+        expect(mockCore.setOutput).toHaveBeenCalledWith('formattedTime', '##');
     });
 
     it("Should run with other basic outputs", () => {
@@ -56,7 +52,7 @@ describe("action", () => {
     });
 
     it("Should throw error", () => {
-        mockCore.setOutput = () => { throw new Error('####') }
+        mockMoment.utcOffset = () => { throw new Error('####') }
         action();
         expect(mockCore.setFailed).toHaveBeenCalledWith('####');
     });
