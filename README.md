@@ -1,5 +1,5 @@
 [![Test the action workflow](https://github.com/josStorer/get-current-time/workflows/Test%20the%20action/badge.svg)](https://github.com/josStorer/get-current-time/actions?query=workflow:"Test+the+action")
-[![Codecov](https://codecov.io/gh/josStorer/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/josStorer/get-current-time/branch/test)
+[![Codecov](https://codecov.io/gh/josStorer/get-current-time/branch/test/graph/badge.svg)](https://codecov.io/gh/josStorer/get-current-time)
 [![GitHub release](https://img.shields.io/github/release/josStorer/get-current-time.svg)](https://github.com/josStorer/get-current-time/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-get--current--time-blue?logo=github)](https://github.com/marketplace/actions/get-current-time)
 [![Repo contributors](https://img.shields.io/github/contributors/josStorer/get-current-time.svg)](https://github.com/josStorer/get-current-time/graphs/contributors)
