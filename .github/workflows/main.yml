@@ -1,17 +1,14 @@
 name: Test the action
-on: 
+on:
   push:
     branches:
-      - test
-  pull_request:
-    branches:
-      - test
+      - master
 jobs:
   test_compiled_file:
     runs-on: ubuntu-latest
     steps:
       - name: Get current time
-        uses: josStorer/get-current-time@test
+        uses: josStorer/get-current-time@master
         id: current-time
         with:
           format: YYYYMMDD-HH
