@@ -47,7 +47,7 @@ Digital outputs, just as names
 ```yaml
 steps:
   - name: Get current time
-    uses: josStorer/get-current-time@v2
+    uses: josStorer/get-current-time@v2.0.1
     id: current-time
     with:
       format: YYYYMMDD-HH
@@ -84,11 +84,9 @@ And you'll see the console output as following:
 
 &ensp;&ensp;action
   
-  &ensp;&ensp;&ensp;&ensp;**√** Should load (2 ms)
+  &ensp;&ensp;&ensp;&ensp;**√** Should load (1 ms)
 
-  &ensp;&ensp;&ensp;&ensp;**√** Should run with basic functionality (2 ms)
-
-  &ensp;&ensp;&ensp;&ensp;**√** Should run with format (1 ms)
+  &ensp;&ensp;&ensp;&ensp;**√** Should run with basic functionality (1 ms)
 
   &ensp;&ensp;&ensp;&ensp;**√** Should run with other basic outputs (1 ms)
 
@@ -97,18 +95,18 @@ And you'll see the console output as following:
   &ensp;&ensp;&ensp;&ensp;**√** Should throw error (1 ms)
 
 
-File       | %&nbsp;Stmts | %&nbsp;Branch | %&nbsp;Funcs | %&nbsp;Lines | Uncovered&nbsp;Line&nbsp;#s
------------|---------|----------|---------|---------|-------------------
-All files  |     100 |      100 |     100 |     100 | 
- action.js |     100 |      100 |     100 |     100 | 
+| File            | %&nbsp;Stmts | %&nbsp;Branch | %&nbsp;Funcs | %&nbsp;Lines | Uncovered&nbsp;Line&nbsp;#s |
+|-----------------|--------------|---------------|--------------|--------------|-----------------------------|
+| All files       | 100          | 100           | 100          | 100          |                             |
+| &nbsp;action.js | 100          | 100           | 100          | 100          |                             |
 
 Test Suites: **1 passed**, 1 total
 
-Tests:       **6 passed**, 6 total
+Tests:       **5 passed**, 5 total
 
 Snapshots:   0 total
 
-Time:        2.50 s
+Time:        1 s
 
 Ran all test suites.
 
