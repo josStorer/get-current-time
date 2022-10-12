@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.9.0",
-    "@actions/github": "^5.0.3",
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
     "moment": "^2.29.4"
   },
   "devDependencies": {
