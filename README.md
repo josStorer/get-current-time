@@ -47,7 +47,7 @@ Digital outputs, just as names
 ```yaml
 steps:
   - name: Get current time
-    uses: josStorer/get-current-time@v2.0.1
+    uses: josStorer/get-current-time@v2.0.2
     id: current-time
     with:
       format: YYYYMMDD-HH
