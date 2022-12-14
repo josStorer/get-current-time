@@ -119,3 +119,7 @@ npm start
 ```
 
 And you'll see the index.js is generated in the dist folder
+
+## Credit
+
+This project is forked from [srfrnk/current-time](https://github.com/srfrnk/current-time) and detached since 14 December of 2022
