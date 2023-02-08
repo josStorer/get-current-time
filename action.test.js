@@ -1,5 +1,6 @@
 const mockMoment = {
-    format: jest.fn()
+    format: jest.fn(),
+    toISOString: jest.fn(),
 };
 jest.doMock('moment', () => () => mockMoment);
 
@@ -10,11 +11,6 @@ const mockCore = {
 };
 jest.doMock('@actions/core', () => mockCore);
 
-const mockDate = {
-    toISOString: jest.fn(),
-};
-Date = function () { return mockDate; }
-
 const action = require('./action.js');
 
 describe("action", () => {
@@ -23,7 +19,7 @@ describe("action", () => {
     });
 
     it("Should run with original functionality", () => {
-        mockDate.toISOString.mockReturnValue('##');
+        mockMoment.toISOString.mockReturnValue('##');
         action();
         expect(mockCore.setOutput).toHaveBeenCalledWith('time', '##');
     });

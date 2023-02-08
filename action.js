@@ -1,5 +1,5 @@
 const core = require("@actions/core");
-var moment = require('moment');
+const moment = require('moment');
 
 function action() {
     try {
