@@ -2,13 +2,13 @@ name: Test the action
 on: 
   push:
     branches:
-      - master
+      - release/v1
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Get current time
-        uses: 1466587594/get-current-time@master
+        uses: 1466587594/get-current-time@release/v1
         id: current-time
         with:
           format: YYYYMMDD-HH
