@@ -6,10 +6,10 @@ branding:
   color: blue
 inputs:
   format:
-    description: "Time format to use using [MomemtJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
+    description: "Time format to use using [MomentJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
     required: false
   utcOffset:
-    description: "UTC offset to use using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
+    description: "UTC offset to use using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
     required: false
 outputs:
   time:
