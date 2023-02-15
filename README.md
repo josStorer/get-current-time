@@ -14,11 +14,11 @@ This action sets the current ISO8601 time to the `time` output and also provides
 
 ### `format`
 
-Time format to use - using [MomemtJS format syntax](https://momentjs.com/docs/#/displaying/format/) - optional
+Time format to use - using [MomentJS format syntax](https://momentjs.com/docs/#/displaying/format/) - optional
 
 ### `utcOffset`
 
-UTC offset to use - using [MomemtJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/) - optional
+UTC offset to use - using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/) - optional
 
 ## Outputs
 
