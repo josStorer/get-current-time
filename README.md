@@ -8,7 +8,11 @@
 
 # Get Current Time Github Action
 
-This action sets the current ISO8601 time to the `time` output and also provides `readableTime`, `formattedTime`, and many more digital outputs like `year`, `day`, `second`, etc. Useful for setting build times in subsequent steps, renaming your artifact, or keeping the same recorded time for the entire workflow.
+This action sets the current ISO8601 time to the `time` output and also provides `readableTime`, `formattedTime`, and
+many more digital outputs like `year`, `day`, `second`, etc. Useful for setting build times in subsequent steps,
+renaming your artifact, or keeping the same recorded time for the entire workflow.
+
+You can view some typical input/output in the [action.test.js](./action.test.js) file.
 
 ## Inputs
 
@@ -19,6 +23,11 @@ Time format to use - using [MomentJS format syntax](https://momentjs.com/docs/#/
 ### `utcOffset`
 
 UTC offset to use - using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/) - optional
+
+### `timezone`
+
+Timezone to use - check [moment-timezone list](https://gist.github.com/diogocapela/12c6617fc87607d11fd62d2a4f42b02a) -
+optional, if set, utcOffset will be ignored, e.g. "America/Los_Angeles"
 
 ## Outputs
 
@@ -70,6 +79,14 @@ steps:
 npm install
 ```
 
+### Build
+
+```
+npm start
+```
+
+And you'll see the index.js is generated in the dist folder
+
 ### Test
 
 ```
@@ -83,17 +100,16 @@ And you'll see the console output as following:
 **PASS**  ./action.test.js
 
 &ensp;&ensp;action
-  
-  &ensp;&ensp;&ensp;&ensp;**√** Should load (1 ms)
 
-  &ensp;&ensp;&ensp;&ensp;**√** Should run with basic functionality (1 ms)
+&ensp;&ensp;&ensp;&ensp;**√** Should load (1 ms)
 
-  &ensp;&ensp;&ensp;&ensp;**√** Should run with other basic outputs (1 ms)
+&ensp;&ensp;&ensp;&ensp;**√** Should correctly set outputs (1 ms)
 
-  &ensp;&ensp;&ensp;&ensp;**√** Should pass format inputs (1 ms)
+&ensp;&ensp;&ensp;&ensp;**√** Should correctly set outputs with utcOffset (1 ms)
 
-  &ensp;&ensp;&ensp;&ensp;**√** Should throw error (1 ms)
+&ensp;&ensp;&ensp;&ensp;**√** Should correctly set outputs with timezone (1 ms)
 
+&ensp;&ensp;&ensp;&ensp;**√** Should throw error (1 ms)
 
 | File            | %&nbsp;Stmts | %&nbsp;Branch | %&nbsp;Funcs | %&nbsp;Lines | Uncovered&nbsp;Line&nbsp;#s |
 |-----------------|--------------|---------------|--------------|--------------|-----------------------------|
@@ -112,14 +128,7 @@ Ran all test suites.
 
 ***
 
-### Build
-
-```
-npm start
-```
-
-And you'll see the index.js is generated in the dist folder
-
 ## Credit
 
-This project is forked from [srfrnk/current-time](https://github.com/srfrnk/current-time) and detached since 14 December of 2022
+This project is forked from [srfrnk/current-time](https://github.com/srfrnk/current-time) and detached since 14 December
+of 2022
