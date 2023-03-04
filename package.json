@@ -9,7 +9,7 @@
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@vercel/ncc": "^0.36.1",
-    "jest": "^29.4.1"
+    "jest": "^29.4.3"
   },
   "scripts": {
     "start": "npm run build",
