@@ -1,12 +1,10 @@
 {
   "name": "get-current-time",
-  "version": "2.0.0",
-  "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "moment": "^2.29.4"
+    "moment-timezone": "^0.5.41"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

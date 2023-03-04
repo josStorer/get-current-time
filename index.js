@@ -1,2 +1,2 @@
-const action = require('./action.js');
-action();
+const action = require('./action.js')
+action()

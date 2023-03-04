@@ -1,59 +1,108 @@
-const mockMoment = {
-    utcOffset: jest.fn().mockReturnThis(),
-    format: jest.fn(),
-    toISOString: jest.fn(),
-    toString: jest.fn(),
-    toArray: jest.fn()
-};
-jest.doMock('moment', () => () => mockMoment);
-
 const mockCore = {
-    getInput: jest.fn(),
     setOutput: jest.fn(),
-    setFailed: jest.fn(),
-};
-jest.doMock('@actions/core', () => mockCore);
+    setFailed: jest.fn()
+}
+jest.doMock('@actions/core', () => mockCore)
 
-const action = require('./action.js');
+jest.spyOn(Date, 'now').mockReturnValue(new Date('2020-07-01T00:30:15.000Z'))
 
-describe("action", () => {
-    it("Should load", () => {
-        expect(action).not.toBeNull();
-    });
+const action = require('./action.js')
 
-    it("Should run with basic functionality", () => {
-        mockMoment.toISOString.mockReturnValue('##');
-        mockMoment.toString.mockReturnValue('##');
-        mockMoment.format.mockReturnValue('##');
-        action();
-        expect(mockCore.setOutput).toHaveBeenCalledWith('time', '##');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('ISOTime', '##');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('readableTime', '##');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('formattedTime', '##');
-    });
+describe('action', () => {
+    it('Should load', () => {
+        expect(action).not.toBeNull()
+    })
 
-    it("Should run with other basic outputs", () => {
-        mockMoment.toArray.mockReturnValue(['2020', '0', '1', '12', '0', '1', '2']);
-        action();
-        expect(mockCore.setOutput).toHaveBeenCalledWith('year', '2020');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('month', '1');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('day', '1');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('hour', '12');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('minute', '0');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('second', '1');
-        expect(mockCore.setOutput).toHaveBeenCalledWith('millisecond', '2');
-    });
+    it('Should correctly set outputs', () => {
+        jest.clearAllMocks()
+        mockCore.getInput = jest.fn().mockImplementation((input) => {
+            switch (input) {
+                case 'utcOffset':
+                    return ''
+                case 'format':
+                    return ''
+                case 'timezone':
+                    return ''
+            }
+        })
+        action()
+        expect(mockCore.setOutput.mock.calls).toEqual([
+            ['time', '2020-07-01T00:30:15.000Z'],
+            ['ISOTime', '2020-07-01T00:30:15.000Z'],
+            ['readableTime', 'Wed Jul 01 2020 00:30:15 GMT+0000'],
+            ['formattedTime', '2020-07-01T00:30:15Z'],
+            ['year', 2020],
+            ['month', 7],
+            ['day', 1],
+            ['hour', 0],
+            ['minute', 30],
+            ['second', 15],
+            ['millisecond', 0]
+        ])
+    })
 
-    it("Should pass format inputs", () => {
-        mockCore.getInput.mockReturnValue('###');
-        action();
-        expect(mockMoment.utcOffset).toHaveBeenCalledWith('###');
-        expect(mockMoment.format).toHaveBeenCalledWith('###');
-    });
+    it('Should correctly set outputs with utcOffset', () => {
+        jest.clearAllMocks()
+        mockCore.getInput = jest.fn().mockImplementation((input) => {
+            switch (input) {
+                case 'utcOffset':
+                    return '+08:00'
+                case 'format':
+                    return 'YYYYMMDD-HH'
+                case 'timezone':
+                    return ''
+            }
+        })
+        action()
+        expect(mockCore.setOutput.mock.calls).toEqual([
+            ['time', '2020-07-01T00:30:15.000Z'],
+            ['ISOTime', '2020-07-01T00:30:15.000Z'],
+            ['readableTime', 'Wed Jul 01 2020 08:30:15 GMT+0800'],
+            ['formattedTime', '20200701-08'],
+            ['year', 2020],
+            ['month', 7],
+            ['day', 1],
+            ['hour', 8],
+            ['minute', 30],
+            ['second', 15],
+            ['millisecond', 0]
+        ])
+    })
 
-    it("Should throw error", () => {
-        mockMoment.utcOffset = () => { throw new Error('####') }
-        action();
-        expect(mockCore.setFailed).toHaveBeenCalledWith('####');
-    });
-});
+    it('Should correctly set outputs with timezone', () => {
+        jest.clearAllMocks()
+        mockCore.getInput = jest.fn().mockImplementation((input) => {
+            switch (input) {
+                case 'utcOffset':
+                    return '+08:00'
+                case 'format':
+                    return 'YYYYMMDD-HH'
+                case 'timezone':
+                    return 'America/Los_Angeles'
+            }
+        })
+        action()
+        expect(mockCore.setOutput.mock.calls).toEqual([
+            ['time', '2020-07-01T00:30:15.000Z'],
+            ['ISOTime', '2020-07-01T00:30:15.000Z'],
+            ['readableTime', 'Tue Jun 30 2020 17:30:15 GMT-0700'],
+            ['formattedTime', '20200630-17'],
+            ['year', 2020],
+            ['month', 6],
+            ['day', 30],
+            ['hour', 17],
+            ['minute', 30],
+            ['second', 15],
+            ['millisecond', 0]
+        ])
+    })
+
+    it('Should throw error', () => {
+        jest.clearAllMocks()
+        mockCore.setOutput = () => {
+            throw new Error('#')
+        }
+        action()
+        expect(mockCore.setFailed).toHaveBeenCalledWith('#')
+    })
+})
