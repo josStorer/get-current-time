@@ -11,6 +11,9 @@ inputs:
   utcOffset:
     description: "UTC offset to use using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
     required: false
+  timezone:
+    description: "Timezone to use using [moment-timezone list](https://gist.github.com/diogocapela/12c6617fc87607d11fd62d2a4f42b02a) (overrides utcOffset)"
+    required: false
 outputs:
   time:
     description: "The ISO time this action was run, **not** affected by the parameter `utcOffset`  e.g. '2020-01-01T00:30:15.000Z'"
