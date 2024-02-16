@@ -27,5 +27,5 @@ outputs:
     description: "Digital outputs, just as names"
 
 runs:
-  using: "node16"
+  using: "node20"
   main: "dist/index.js"
