@@ -1,18 +1,18 @@
 name: "Get Current Time"
 author: "Gerred Dillon <hello@gerred.org>, Shahar Frank <srfrnk@gmail.com>, Joshua Chan <josStorer@outlook.com>"
-description: "Get the current time with `format` and `utcOffset`"
+description: "Get the current time with `format`, `utcOffset` and `timezone`"
 branding:
   icon: clock
   color: blue
 inputs:
   format:
-    description: "Time format to use using [MomentJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
+    description: "Time format to use - using [MomentJS format syntax](https://momentjs.com/docs/#/displaying/format/)"
     required: false
   utcOffset:
-    description: "UTC offset to use using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
+    description: "UTC offset to use - using [MomentJS utcOffset syntax](https://momentjs.com/docs/#/manipulating/utc-offset/)"
     required: false
   timezone:
-    description: "Timezone to use using [moment-timezone list](https://gist.github.com/diogocapela/12c6617fc87607d11fd62d2a4f42b02a) (overrides utcOffset)"
+    description: "Timezone to use - using [moment-timezone list](https://gist.github.com/diogocapela/12c6617fc87607d11fd62d2a4f42b02a) (overrides utcOffset)"
     required: false
 outputs:
   time:
