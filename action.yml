@@ -17,5 +17,5 @@ outputs:
   formattedTime:
     description: "The time this action was run - formatted using `format` and `utcOffset` input"
 runs:
-  using: "node16"
+  using: "node20"
   main: "dist/index.js"
