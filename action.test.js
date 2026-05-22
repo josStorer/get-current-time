@@ -1,21 +1,35 @@
+import {jest} from '@jest/globals'
+
 const mockCore = {
+    getInput: jest.fn(),
     setOutput: jest.fn(),
     setFailed: jest.fn()
 }
-jest.doMock('@actions/core', () => mockCore)
 
-jest.spyOn(Date, 'now').mockReturnValue(new Date('2020-07-01T00:30:15.000Z'))
+jest.unstable_mockModule('@actions/core', () => mockCore)
 
-const action = require('./action.js')
+const {default: action} = await import('./action.js')
+
+const fixedNow = new Date('2020-07-01T00:30:15.000Z').valueOf()
+const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(fixedNow)
 
 describe('action', () => {
+    beforeEach(() => {
+        mockCore.getInput.mockReset()
+        mockCore.setOutput.mockReset()
+        mockCore.setFailed.mockReset()
+    })
+
+    afterAll(() => {
+        nowSpy.mockRestore()
+    })
+
     it('Should load', () => {
         expect(action).not.toBeNull()
     })
 
     it('Should correctly set outputs', () => {
-        jest.clearAllMocks()
-        mockCore.getInput = jest.fn().mockImplementation((input) => {
+        mockCore.getInput.mockImplementation((input) => {
             switch (input) {
                 case 'utcOffset':
                     return ''
@@ -42,8 +56,7 @@ describe('action', () => {
     })
 
     it('Should correctly set outputs with utcOffset', () => {
-        jest.clearAllMocks()
-        mockCore.getInput = jest.fn().mockImplementation((input) => {
+        mockCore.getInput.mockImplementation((input) => {
             switch (input) {
                 case 'utcOffset':
                     return '+08:00'
@@ -70,8 +83,7 @@ describe('action', () => {
     })
 
     it('Should correctly set outputs with timezone', () => {
-        jest.clearAllMocks()
-        mockCore.getInput = jest.fn().mockImplementation((input) => {
+        mockCore.getInput.mockImplementation((input) => {
             switch (input) {
                 case 'utcOffset':
                     return '+08:00'
@@ -98,10 +110,9 @@ describe('action', () => {
     })
 
     it('Should throw error', () => {
-        jest.clearAllMocks()
-        mockCore.setOutput = () => {
+        mockCore.setOutput.mockImplementation(() => {
             throw new Error('#')
-        }
+        })
         action()
         expect(mockCore.setFailed).toHaveBeenCalledWith('#')
     })

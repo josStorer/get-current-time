@@ -1,5 +1,5 @@
-const core = require('@actions/core')
-const moment = require('moment-timezone')
+import * as core from '@actions/core'
+import moment from 'moment-timezone'
 
 function action() {
     try {
@@ -34,4 +34,4 @@ function action() {
     }
 }
 
-module.exports = action
+export default action

@@ -1,6 +1,7 @@
 {
   "name": "get-current-time",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "@actions/core": "^3.0.1",
     "@actions/github": "^9.1.1",
@@ -14,6 +15,6 @@
   "scripts": {
     "start": "npm run build",
     "build": "ncc build index.js -m",
-    "test": "jest --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   }
 }
