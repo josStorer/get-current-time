@@ -1,0 +1,129 @@
+name: Test release versions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover_tags:
+    runs-on: ubuntu-latest
+    outputs:
+      all: ${{ steps.tags.outputs.all }}
+      timezone: ${{ steps.tags.outputs.timezone }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: tags
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          all_tags="$(git tag --list 'v*' --sort=v:refname)"
+          timezone_tags="$(
+            for tag in $all_tags; do
+              if git show "$tag:action.yml" | grep -q '^[[:space:]]*timezone:'; then
+                echo "$tag"
+              fi
+            done
+          )"
+
+          {
+            echo 'all<<EOF'
+            printf '%s\n' "$all_tags" | jq -R -s -c 'split("\n") | map(select(length > 0))'
+            echo EOF
+
+            echo 'timezone<<EOF'
+            printf '%s\n' "$timezone_tags" | jq -R -s -c 'split("\n") | map(select(length > 0))'
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+  test_utc_offset:
+    needs: discover_tags
+    if: needs.discover_tags.outputs.all != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJson(needs.discover_tags.outputs.all) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          path: tested-action
+
+      - name: Run ${{ matrix.ref }}
+        id: current-time
+        uses: ./tested-action
+        with:
+          format: YYYYMMDD-HH
+          utcOffset: "+08:00"
+
+      - name: Assert ${{ matrix.ref }} outputs
+        shell: bash
+        env:
+          TIME: ${{ steps.current-time.outputs.time }}
+          ISO_TIME: ${{ steps.current-time.outputs.ISOTime }}
+          READABLE_TIME: ${{ steps.current-time.outputs.readableTime }}
+          FORMATTED_TIME: ${{ steps.current-time.outputs.formattedTime }}
+          YEAR: ${{ steps.current-time.outputs.year }}
+          MONTH: ${{ steps.current-time.outputs.month }}
+          DAY: ${{ steps.current-time.outputs.day }}
+          HOUR: ${{ steps.current-time.outputs.hour }}
+          MINUTE: ${{ steps.current-time.outputs.minute }}
+          SECOND: ${{ steps.current-time.outputs.second }}
+          MILLISECOND: ${{ steps.current-time.outputs.millisecond }}
+        run: |
+          set -euo pipefail
+
+          [[ -n "$TIME" ]]
+          [[ "$TIME" == "$ISO_TIME" ]]
+          [[ "$READABLE_TIME" == *GMT+0800* ]]
+          [[ "$FORMATTED_TIME" =~ ^[0-9]{8}-[0-9]{2}$ ]]
+
+          [[ "$YEAR" =~ ^[0-9]{4}$ ]]
+          [[ "$MONTH" =~ ^[0-9]+$ ]] && (( MONTH >= 1 && MONTH <= 12 ))
+          [[ "$DAY" =~ ^[0-9]+$ ]] && (( DAY >= 1 && DAY <= 31 ))
+          [[ "$HOUR" =~ ^[0-9]+$ ]] && (( HOUR >= 0 && HOUR <= 23 ))
+          [[ "$MINUTE" =~ ^[0-9]+$ ]] && (( MINUTE >= 0 && MINUTE <= 59 ))
+          [[ "$SECOND" =~ ^[0-9]+$ ]] && (( SECOND >= 0 && SECOND <= 59 ))
+          [[ "$MILLISECOND" =~ ^[0-9]+$ ]] && (( MILLISECOND >= 0 && MILLISECOND <= 999 ))
+
+  test_timezone:
+    needs: discover_tags
+    if: needs.discover_tags.outputs.timezone != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJson(needs.discover_tags.outputs.timezone) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          path: tested-action
+
+      - name: Run ${{ matrix.ref }} with timezone
+        id: current-time
+        uses: ./tested-action
+        with:
+          format: YYYYMMDD-HH ZZ
+          utcOffset: "+08:00"
+          timezone: America/Los_Angeles
+
+      - name: Assert ${{ matrix.ref }} timezone outputs
+        shell: bash
+        env:
+          READABLE_TIME: ${{ steps.current-time.outputs.readableTime }}
+          FORMATTED_TIME: ${{ steps.current-time.outputs.formattedTime }}
+        run: |
+          set -euo pipefail
+
+          [[ -n "$READABLE_TIME" ]]
+          [[ -n "$FORMATTED_TIME" ]]
+          [[ "$READABLE_TIME" != *GMT+0800* ]]
+          [[ "$READABLE_TIME" == *GMT-0700* || "$READABLE_TIME" == *GMT-0800* ]]
+          [[ "$FORMATTED_TIME" =~ ^[0-9]{8}-[0-9]{2}\ -0(7|8)00$ ]]
