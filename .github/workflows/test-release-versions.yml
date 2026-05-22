@@ -13,7 +13,7 @@ jobs:
       all: ${{ steps.tags.outputs.all }}
       timezone: ${{ steps.tags.outputs.timezone }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -50,7 +50,7 @@ jobs:
       matrix:
         ref: ${{ fromJson(needs.discover_tags.outputs.all) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ matrix.ref }}
           path: tested-action
@@ -101,7 +101,7 @@ jobs:
       matrix:
         ref: ${{ fromJson(needs.discover_tags.outputs.timezone) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ matrix.ref }}
           path: tested-action
